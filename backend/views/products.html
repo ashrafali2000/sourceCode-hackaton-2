@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <ul id="myPara"></ul>
+    <script>
+        (function(){
+            let myPara = document.getElementById("myPara");
+            fetch("http://localhost:3000/products")
+            .then(res => res.json())
+            .then(res => res.products.map(p =>  myPara.innerHTML += `<li> ${p.title}</li>
+            <img src = ${p.images[0]} style= width:190px>
+            
+            `))
+            .catch(err => console.log(err))
+        })();
+    </script>
+</body>
+</html>
