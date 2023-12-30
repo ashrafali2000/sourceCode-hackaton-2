@@ -1,10 +1,17 @@
 // import logo from './logo.svg';
+import { Route, Routes} from "react-router-dom";
 import './App.css';
+import { SingUp } from "./pages/signUp";
+import { Navbar } from "./components/navbar";
 
 function App() {
   return (
-    <div className="App">
-     <h2 className='text-4xl text-red-500'>My Front End Project</h2>
+    <div className="max-w-7xl mx-auto px-5">
+      <Routes>
+        <Route path="/" element = {<Navbar/>}>
+         <Route index element = {<SingUp />}/>
+        </Route>
+      </Routes>
     </div>
   );
 }
