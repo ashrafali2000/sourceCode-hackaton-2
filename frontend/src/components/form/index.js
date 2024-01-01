@@ -1,6 +1,7 @@
 import {useRef, useState} from "react"
 import { Link } from "react-router-dom"
 export  const FormComponent = ({signUp}) => {
+    
     const nameRef = useRef();
     const fileRef = useRef();
     const emailRef = useRef();
