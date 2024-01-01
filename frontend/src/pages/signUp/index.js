@@ -2,7 +2,7 @@ import { FormComponent } from "../../components/form"
 
 export const SingUp = () => {
     const singUpHandler = () => {
-        
+ 
     }
     return (
         <>
