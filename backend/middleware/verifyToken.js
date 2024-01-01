@@ -4,13 +4,15 @@ const { jwtSecretKey } = require("../constants");
 const verifyToken = (req, res, next) => {
     try {
         const { authorization } = req.headers;
+        console.log(authorization)
         const token = authorization && authorization.split(" ")[1];
-        jwt.verify(token, jwtSecretKey, function (err, decoded) {
-            if (err) {
-                return res.status(401).send({ message: "Unauthorized", err })
-            }
-            return next()
-        })
+        console.log(token)
+        // jwt.verify(token, jwtSecretKey , function (err, decoded) {
+        //     if (err) {
+        //         return res.status(401).send({ message: "User Nahi hai", err })
+        //     }
+        //     return next()
+        // })
     } catch (err) {
         return res.status(401).send({ err })
     }
