@@ -1,7 +1,11 @@
-import {useState} from "react"
+import {useRef, useState} from "react"
 import { Link } from "react-router-dom"
 export  const FormComponent = ({signUp}) => {
-    const [switchForm, setSwitchForm] = useState(false)
+    const nameRef = useRef();
+    const fileRef = useRef();
+    const emailRef = useRef();
+    const passwordRef = useRef();
+    const conFormPasswordRef = useRef();
 return (
 <>
 <section class="bg-white dark:bg-gray-900">
@@ -29,7 +33,7 @@ return (
                     </svg>
                 </span>
 
-                <input type="text" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
+                <input type="text" ref={nameRef} class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Username" />
             </div>}
 
            {signUp &&<label for="dropzone-file" class="flex items-center px-3 py-3 mx-auto mt-6 text-center bg-white border-2 border-dashed rounded-lg cursor-pointer dark:border-gray-600 dark:bg-gray-900">
@@ -39,7 +43,7 @@ return (
 
                 <h2 class="mx-3 text-gray-400">Profile Photo</h2>
 
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input id="dropzone-file"  type="file" ref={fileRef} class="hidden" />
             </label>}
 
             <div class="relative flex items-center mt-6">
@@ -49,7 +53,7 @@ return (
                     </svg>
                 </span>
 
-                <input type="email" class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"/>
+                <input type="email" ref={emailRef} class="block w-full py-3 text-gray-700 bg-white border rounded-lg px-11 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Email address"/>
             </div>
 
             <div class="relative flex items-center mt-4">
@@ -59,7 +63,7 @@ return (
                     </svg>
                 </span>
 
-                <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
+                <input type="password" ref={passwordRef} class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Password" />
             </div>
 
             {signUp &&<div class="relative flex items-center mt-4">
@@ -69,7 +73,7 @@ return (
                     </svg>
                 </span>
 
-                <input type="password" class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password" />
+                <input type="password" ref={conFormPasswordRef} class="block w-full px-10 py-3 text-gray-700 bg-white border rounded-lg dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-blue-300 focus:outline-none focus:ring focus:ring-opacity-40" placeholder="Confirm Password" />
             </div>}
 
             {signUp ? <div class="mt-6">
