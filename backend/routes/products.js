@@ -1,9 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const { getAllProducts, addProduct, findProduct } = require("../controllers/products");
-const verifyToken = require("../middleware/verifyToken")
+const {
+  getAllProducts,
+  addProduct,
+  findProduct,
+} = require("../controllers/products");
+const userToken = require("../middleware/userToken");
 // get all Products Api
-router.get("/",verifyToken, async (req, res) => {
+router.get("/", userToken, async (req, res) => {
   const products = await getAllProducts();
   res.send(products);
 });
@@ -18,8 +22,7 @@ router.get("/:p", async (req, res) => {
 // post product method or controller
 router.post("/", async (req, res) => {
   try {
-    const { title, description, price, category, rating, images } =
-      req.body;
+    const { title, description, price, category, rating, images } = req.body;
     const response = await addProduct({
       title,
       description,

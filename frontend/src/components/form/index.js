@@ -12,11 +12,11 @@ export const FormComponent = ({ signUp, singUpHandler, singInHandler }) => {
     const email = emailRef.current.value;
     const password = passwordRef.current.value;
     if (!singUpHandler) {
-        singInHandler();
+      singInHandler();
     } else {
-        const conFormPassword = conFormPasswordRef.current.value;
-        const name = nameRef.current.value;
-        const file = fileRef.current.files[0];
+      const conFormPassword = conFormPasswordRef.current.value;
+      const name = nameRef.current.value;
+      const file = fileRef.current.files[0];
       if (password === conFormPassword) {
         singUpHandler(name, email, password);
       }
