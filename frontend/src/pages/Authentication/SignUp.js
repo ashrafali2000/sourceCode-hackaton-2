@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
-import LogoDark from '../../images/logo/logo-dark.svg';
-import Logo from '../../images/logo/logo.svg';
+import { Link } from "react-router-dom";
+import LogoDark from "../../components/images/logo/logo-dark.svg";
+import Logo from "../../components/images/logo/logo.svg";
 
 const SignUp = () => {
   return (
@@ -334,7 +334,7 @@ const SignUp = () => {
 
                 <div className="mt-6 text-center">
                   <p>
-                    Already have an account?{' '}
+                    Already have an account?{" "}
                     <Link to="/auth/signin" className="text-primary">
                       Sign in
                     </Link>

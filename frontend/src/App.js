@@ -1,11 +1,11 @@
 import React, { useEffect, useState, lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
-
-import ECommerce from "./pages/Dashboard/ECommerce";
+import Loader from "./components/common/Loader";
+import ECommerce from "./pages/dashBoard/ECommerce";
 import SignIn from "./pages/Authentication/SignIn";
 import SignUp from "./pages/Authentication/SignUp";
-import Loader from "./common/Loader";
+
 import routes from "./routes";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));

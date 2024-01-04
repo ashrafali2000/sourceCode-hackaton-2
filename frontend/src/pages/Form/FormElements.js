@@ -1,13 +1,13 @@
-import Breadcrumb from '../../components/Breadcrumb';
-import CheckboxFive from '../../components/CheckboxFive';
-import CheckboxFour from '../../components/CheckboxFour';
-import CheckboxOne from '../../components/CheckboxOne';
-import CheckboxThree from '../../components/CheckboxThree';
-import CheckboxTwo from '../../components/CheckboxTwo';
-import SwitcherFour from '../../components/SwitcherFour';
-import SwitcherOne from '../../components/SwitcherOne';
-import SwitcherThree from '../../components/SwitcherThree';
-import SwitcherTwo from '../../components/SwitcherTwo';
+import Breadcrumb from "../../components/dashboard/Breadcrumb";
+import CheckboxFive from "../../components/dashboard/CheckboxFive";
+import CheckboxFour from "../../components/dashboard/CheckboxFour";
+import CheckboxOne from "../../components/dashboard/CheckboxOne";
+import CheckboxThree from "../../components/dashboard/CheckboxThree";
+import CheckboxTwo from "../../components/dashboard/CheckboxTwo";
+import SwitcherFour from "../../components/dashboard/SwitcherFour";
+import SwitcherOne from "../../components/dashboard/SwitcherOne";
+import SwitcherThree from "../../components/dashboard/SwitcherThree";
+import SwitcherTwo from "../../components/dashboard/SwitcherTwo";
 
 const FormElements = () => {
   return (

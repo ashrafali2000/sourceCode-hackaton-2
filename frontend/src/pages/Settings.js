@@ -1,12 +1,16 @@
-import Breadcrumb from '../components/Breadcrumb';
-import userThree from '../images/user/user-03.png';
-import fireToast from '../hooks/fireToast';
-import { Table } from "../components/TableSettings";
-import { Modal } from "../components/ModalSettings";
-import { useState,useEffect } from "react";
+import userThree from "../components/images/user/user-03.png";
+import fireToast from "../components/hooks/fireToast";
+// import { Table } from "../components/dashboard/TableSettings";
+// import { Modal } from "../components/dashboard/ModalSettings";
+import { useState, useEffect } from "react";
+import Breadcrumb from "../components/dashboard/Breadcrumb";
 const Settings = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [rows, setRows] = useState(localStorage.getItem("alertSettings")?JSON.parse(localStorage.getItem("alertSettings")):[]);
+  const [rows, setRows] = useState(
+    localStorage.getItem("alertSettings")
+      ? JSON.parse(localStorage.getItem("alertSettings"))
+      : []
+  );
   useEffect(() => {
     // storing input name
     localStorage.setItem("alertSettings", JSON.stringify(rows));
@@ -38,7 +42,6 @@ const Settings = () => {
   return (
     <>
       <div className="mx-auto max-w-270">
-        
         <Breadcrumb pageName="Settings" />
 
         <div className="grid grid-cols-5 gap-8">
