@@ -1,16 +1,16 @@
 import userThree from "../components/images/user/user-03.png";
 import fireToast from "../components/hooks/fireToast";
-// import { Table } from "../components/dashboard/TableSettings";
+import { Table } from "../components/dashboard/TableSettings";
 // import Modal from "../components/dashboard/ModalSettings";
 import { useState, useEffect } from "react";
 import Breadcrumb from "../components/dashboard/Breadcrumb";
 const Settings = () => {
   const [modalOpen, setModalOpen] = useState(false);
-  const [rows, setRows] = useState(
-    localStorage.getItem("alertSettings")
-      ? JSON.parse(localStorage.getItem("alertSettings"))
-      : []
-  );
+  // const [rows, setRows] = useState(
+  //   localStorage.getItem("alertSettings")
+  //     ? JSON.parse(localStorage.getItem("alertSettings"))
+  //     : []
+  // );
   useEffect(() => {
     // storing input name
     localStorage.setItem("alertSettings", JSON.stringify(rows));
@@ -18,29 +18,36 @@ const Settings = () => {
   const [rowToEdit, setRowToEdit] = useState(null);
 
   const handleDeleteRow = (targetIndex) => {
-    setRows(rows.filter((_, idx) => idx !== targetIndex));
+    // setRows(rows.filter((_, idx) => idx !== targetIndex));
   };
 
   const handleEditRow = (idx) => {
-    setRowToEdit(idx);
-
-    setModalOpen(true);
+    // setRowToEdit(idx);
+    // setModalOpen(true);
   };
 
   const handleSubmit = (newRow) => {
-    rowToEdit === null
-      ? setRows([...rows, newRow])
-      : setRows(
-          rows.map((currRow, idx) => {
-            if (idx !== rowToEdit) return currRow;
-            return newRow;
-          })
-        );
+    rowToEdit === null;
+    // ? setRows([...rows, newRow])
+    // : setRows(
+    //     rows.map((currRow, idx) => {
+    //       if (idx !== rowToEdit) return currRow;
+    //       return newRow;
+    //     })
+    //   );
   };
 
+  // create rows
+  const rows = [
+    { id: 1, criterion: 0, value: "Ashraf", type: 0 },
+    { id: 2, criterion: 3, value: "Ashraf", type: 1 },
+    { id: 3, criterion: 2, value: "Ashraf", type: 0 },
+    { id: 4, criterion: 0, value: "Ashraf", type: 1 },
+    { id: 5, criterion: 1, value: "Ashraf", type: 0 },
+  ];
   return (
     <>
-      <div className="mx-auto max-w-270">
+      {/* <div className="mx-auto max-w-270">
         <Breadcrumb pageName="Settings" />
 
         <div className="grid grid-cols-5 gap-8">
@@ -340,9 +347,9 @@ const Settings = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
       {/* <Modal /> */}
-      {/* <Table /> */}
+      <Table rows={rows} />
     </>
   );
 };
