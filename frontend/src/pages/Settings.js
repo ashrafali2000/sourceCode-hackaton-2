@@ -1,7 +1,7 @@
 import userThree from "../components/images/user/user-03.png";
 import fireToast from "../components/hooks/fireToast";
 // import { Table } from "../components/dashboard/TableSettings";
-// import { Modal } from "../components/dashboard/ModalSettings";
+// import Modal from "../components/dashboard/ModalSettings";
 import { useState, useEffect } from "react";
 import Breadcrumb from "../components/dashboard/Breadcrumb";
 const Settings = () => {
@@ -33,7 +33,6 @@ const Settings = () => {
       : setRows(
           rows.map((currRow, idx) => {
             if (idx !== rowToEdit) return currRow;
-
             return newRow;
           })
         );
@@ -342,6 +341,8 @@ const Settings = () => {
           </div>
         </div>
       </div>
+      {/* <Modal /> */}
+      {/* <Table /> */}
     </>
   );
 };
