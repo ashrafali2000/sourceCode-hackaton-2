@@ -3,7 +3,9 @@ const router = express.Router();
 const { createUser, loginUser, getAllUser } = require("../controllers/user");
 const userToken = require("../middleware/userToken");
 const Joi = require("joi");
-
+const multer  = require('multer')
+const { storage } = require('../Config/cloudinary');
+const upload = multer({ storage: storage })
 // JOI Schema
 const joiUSerSchema = Joi.object({
   firstName: Joi.string().required().min(5),
@@ -21,11 +23,13 @@ router.get("/", userToken, async (req, res) => {
   }
 });
 // user CreateUser Controller
-router.post("/signup", async (req, res) => {
+router.post("/signup",upload.single('image'), async (req, res) => {
   try {
     // await joiUSerSchema.validateAsync(req.body);
     const { name, email, password } = req.body;
-    const response = await createUser({ name, email, password });
+    console.log(req.file);
+    const image = req.file.path;
+    const response = await createUser({ name, email, password , image:image});
     return res.status(200).send({ status: 200, message: response });
   } catch (err) {
     return res.status(400).send({ status: 400, message: err.message });

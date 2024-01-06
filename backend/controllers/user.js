@@ -2,7 +2,7 @@ require("dotenv").config();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const jwtSecretKey = require("../constants")
+// const jwtSecretKey = require("../constants")
 
 //  get all user 
 const getAllUser = async() => {

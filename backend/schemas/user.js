@@ -14,6 +14,9 @@ const { Schema } = mongoose;
     password:{
         type:Schema.Types.String,
         required:true,
+    },
+    images: {
+        type: String,
     }
  })
 
