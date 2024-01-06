@@ -1,10 +1,8 @@
+require("dotenv").config();
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const jwtSecretKey = require("../constants")
-require("dotenv").config();
-
-
 
 //  get all user 
 const getAllUser = async() => {
@@ -19,7 +17,7 @@ const createUser = async (data) => {
     const newUser = await user.save();
     const token = jwt.sign(
       { _id: newUser._id, email: newUser.email },
-      jwtSecretKey,
+      process.env.JWT_SECRET,
       { expiresIn: "1h" }
     );
     return ({message:"User Created Successfully", newUser ,token});
@@ -41,7 +39,7 @@ const loginUser = async (data) => {
       );
       if (comparePassword) {
         delete userFound.password;
-        const token = jwt.sign({_id:userFound._id, email: userFound.email},"user!",{ expiresIn: '1h' })
+        const token = jwt.sign({_id:userFound._id, email: userFound.email},process.env.JWT_SECRET,{ expiresIn: '1h' })
         return ({message:"Login Successful", userFound, token});
       } else if (!comparePassword) {
         throw new Error("Incorrect Password");

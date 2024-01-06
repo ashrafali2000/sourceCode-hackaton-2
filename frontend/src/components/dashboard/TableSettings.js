@@ -2,10 +2,10 @@ import React from "react";
 import { BsFillTrashFill, BsFillPencilFill } from "react-icons/bs";
 import dataJSON from "../../data.json";
 
-export const Table = ({ rows, deleteRow, editRow }) => {
-  const fields = Object.keys(Object.values(dataJSON)[0]).filter(
-    (item) => !item.startsWith("delta_")
-  );
+export const Table = ({ rows }) => {
+  // const fields = Object.keys(Object.values(dataJSON)[0]).filter(
+  //   (item) => !item.startsWith("delta_")
+  // );
 
   return (
     <div className="max-w-full overflow-x-auto table-wrapper">
@@ -70,11 +70,11 @@ export const Table = ({ rows, deleteRow, editRow }) => {
                 <span className="actions flex grid-cols-2 gap-4">
                   <BsFillTrashFill
                     className="delete-btn cursor-pointer"
-                    onClick={() => deleteRow(idx)}
+                    // onClick={() => deleteRow(idx)}
                   />
                   <BsFillPencilFill
                     className="edit-btn cursor-pointer"
-                    onClick={() => editRow(idx)}
+                    // onClick={() => editRow(idx)}
                   />
                 </span>
               </td>

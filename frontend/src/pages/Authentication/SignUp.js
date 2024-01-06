@@ -1,8 +1,31 @@
 import { Link } from "react-router-dom";
 import LogoDark from "../../components/images/logo/logo-dark.svg";
 import Logo from "../../components/images/logo/logo.svg";
-
+import axiosInstance from "../../axios"
+import { useRef } from "react";
 const SignUp = () => {
+  const nameRef = useRef()
+  const emaiRef = useRef()
+  const passwordRef = useRef()
+  const rePasswordRef = useRef()
+  const singUpHandler = (e) => {
+    e.preventDefault();
+    const name = nameRef.current.value;
+    const email = emaiRef.current.value;
+    const password = passwordRef.current.value;
+    const rePassword = rePasswordRef.current.value;
+    if(password === rePassword){
+      return  axiosInstance.post("auth/signup", {
+        name,email,password
+       }).then( (res) => {
+           console.log("response", res);
+         }).catch( (err) => {
+           console.log("error--->", err);
+         });
+    }else{
+      alert("Your Password field not match both")
+    }
+  }
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -11,7 +34,8 @@ const SignUp = () => {
             <div className="py-17.5 px-26 text-center">
               <Link className="mb-5.5 inline-block" to="/">
                 <img className="hidden dark:block" src={Logo} alt="Logo" />
-                <img className="dark:hidden" src={LogoDark} alt="Logo" />
+                {/* <img className="dark:hidden" src={LogoDark} alt="Logo" /> */}
+                <span className="text-lg font-bold">App Logo</span>
               </Link>
               <p className="2xl:px-20">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit
@@ -147,10 +171,10 @@ const SignUp = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign Up to TailAdmin
+                Sign Up to Your Account
               </h2>
 
-              <form>
+              <form onSubmit={singUpHandler}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Name
@@ -158,7 +182,9 @@ const SignUp = () => {
                   <div className="relative">
                     <input
                       type="text"
+                      required
                       placeholder="Enter your full name"
+                      ref={nameRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -194,6 +220,8 @@ const SignUp = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
+                      required
+                      ref={emaiRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -225,6 +253,8 @@ const SignUp = () => {
                     <input
                       type="password"
                       placeholder="Enter your password"
+                      required
+                      ref={passwordRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -260,6 +290,8 @@ const SignUp = () => {
                     <input
                       type="password"
                       placeholder="Re-enter your password"
+                      required
+                      ref={rePasswordRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -288,11 +320,7 @@ const SignUp = () => {
                 </div>
 
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Create account"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  <button className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">Create account</button>
                 </div>
 
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">

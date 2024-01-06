@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
 });
 
 // user LoginUser Controller
-router.post("/login", async (req, res) => {
+router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     const response = await loginUser({ email, password });

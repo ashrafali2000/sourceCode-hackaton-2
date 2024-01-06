@@ -1,10 +1,62 @@
 import { Link } from "react-router-dom";
 import LogoDark from "../../components/images/logo/logo-dark.svg";
 import Logo from "../../components/images/logo/logo.svg";
+import { useRef, useState } from "react";
+import axiosInstance from "../../axios";
 
 const SignIn = () => {
+  const [resAlert, setResAlert] = useState("");
+  const emaiRef = useRef()
+  const passwordRef = useRef()
+  const singInHandler = (e) => {
+    e.preventDefault();
+    const email = emaiRef.current.value;
+    const password = passwordRef.current.value;
+      return  axiosInstance.post("auth/signin", {
+      email,password
+       }).then( (res) => {
+           console.log("response", res.data);
+           setResAlert(res.data.user.message)
+         }).catch( (err) => {
+           console.log("error--->", err);
+         });
+   
+  }
+  if(resAlert){
+    setInterval(function () {
+      setResAlert("")
+    }, 2000)
+  }
   return (
     <>
+   <div className="absolute md:left-1/2 transform md:-translate-x-1/2  top-0">
+       <div className="flex w-3/4  md:w-3/4 border-l-6 border-[#34D399] bg-[#b9ebd5] px-4 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
+            <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
+              <svg
+                width="16"
+                height="12"
+                viewBox="0 0 16 12"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M15.2984 0.826822L15.2868 0.811827L15.2741 0.797751C14.9173 0.401867 14.3238 0.400754 13.9657 0.794406L5.91888 9.45376L2.05667 5.2868C1.69856 4.89287 1.10487 4.89389 0.747996 5.28987C0.417335 5.65675 0.417335 6.22337 0.747996 6.59026L0.747959 6.59029L0.752701 6.59541L4.86742 11.0348C5.14445 11.3405 5.52858 11.5 5.89581 11.5C6.29242 11.5 6.65178 11.3355 6.92401 11.035L15.2162 2.11161C15.5833 1.74452 15.576 1.18615 15.2984 0.826822Z"
+                  fill="white"
+                  stroke="white"
+                ></path>
+              </svg>
+            </div>
+            <div className="w-full">
+              <h5 className="mb-3 text-lg font-semibold text-black dark:text-[#34D399] ">
+               {resAlert}
+              </h5>
+              <p className="text-base leading-relaxed text-body">
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </p>
+            </div>
+          </div>
+    </div>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
         <div className="flex flex-wrap items-center">
           <div className="hidden w-full xl:block xl:w-1/2">
@@ -148,10 +200,10 @@ const SignIn = () => {
             <div className="w-full p-4 sm:p-12.5 xl:p-17.5">
               <span className="mb-1.5 block font-medium">Start for free</span>
               <h2 className="mb-9 text-2xl font-bold text-black dark:text-white sm:text-title-xl2">
-                Sign In to TailAdmin
+                Sign In to Your Account
               </h2>
 
-              <form>
+              <form onSubmit={singInHandler}>
                 <div className="mb-4">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
                     Email
@@ -160,6 +212,7 @@ const SignIn = () => {
                     <input
                       type="email"
                       placeholder="Enter your email"
+                      ref={emaiRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -185,12 +238,13 @@ const SignIn = () => {
 
                 <div className="mb-6">
                   <label className="mb-2.5 block font-medium text-black dark:text-white">
-                    Re-type Password
+                    Password
                   </label>
                   <div className="relative">
                     <input
                       type="password"
                       placeholder="6+ Characters, 1 Capital letter"
+                      ref={passwordRef}
                       className="w-full rounded-lg border border-stroke bg-transparent py-4 pl-6 pr-10 outline-none focus:border-primary focus-visible:shadow-none dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
                     />
 
@@ -219,11 +273,7 @@ const SignIn = () => {
                 </div>
 
                 <div className="mb-5">
-                  <input
-                    type="submit"
-                    value="Sign In"
-                    className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90"
-                  />
+                  <button className="w-full cursor-pointer rounded-lg border border-primary bg-primary p-4 text-white transition hover:bg-opacity-90">Sign In</button>
                 </div>
 
                 <button className="flex w-full items-center justify-center gap-3.5 rounded-lg border border-stroke bg-gray p-4 hover:bg-opacity-50 dark:border-strokedark dark:bg-meta-4 dark:hover:bg-opacity-50">

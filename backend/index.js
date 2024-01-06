@@ -18,7 +18,7 @@ app.use(express.json());
 app.use("/products", product);
 
 // Users MiddleWare
-app.use("/user", user);
+app.use("/auth", user);
 
 // db CONNECTION
 const db = mongoose.connection;

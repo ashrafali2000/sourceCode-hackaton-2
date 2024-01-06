@@ -5,29 +5,29 @@ import { Table } from "../components/dashboard/TableSettings";
 import { useState, useEffect } from "react";
 import Breadcrumb from "../components/dashboard/Breadcrumb";
 const Settings = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  // const [modalOpen, setModalOpen] = useState(false);
   // const [rows, setRows] = useState(
   //   localStorage.getItem("alertSettings")
   //     ? JSON.parse(localStorage.getItem("alertSettings"))
   //     : []
   // );
-  useEffect(() => {
+  // useEffect(() => {
     // storing input name
-    localStorage.setItem("alertSettings", JSON.stringify(rows));
-  }, [rows]);
-  const [rowToEdit, setRowToEdit] = useState(null);
+  //   localStorage.setItem("alertSettings", JSON.stringify(rows));
+  // }, [rows]);
+  // const [rowToEdit, setRowToEdit] = useState(null);
 
-  const handleDeleteRow = (targetIndex) => {
+  // const handleDeleteRow = (targetIndex) => {
     // setRows(rows.filter((_, idx) => idx !== targetIndex));
-  };
+  // };
 
-  const handleEditRow = (idx) => {
+  // const handleEditRow = (idx) => {
     // setRowToEdit(idx);
     // setModalOpen(true);
-  };
+  // };
 
-  const handleSubmit = (newRow) => {
-    rowToEdit === null;
+  // const handleSubmit = (newRow) => {
+    // rowToEdit === null;
     // ? setRows([...rows, newRow])
     // : setRows(
     //     rows.map((currRow, idx) => {
@@ -35,7 +35,7 @@ const Settings = () => {
     //       return newRow;
     //     })
     //   );
-  };
+  // };
 
   // create rows
   const rows = [
