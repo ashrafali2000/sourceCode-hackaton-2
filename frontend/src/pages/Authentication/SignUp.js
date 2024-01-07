@@ -2,21 +2,25 @@ import { Link } from "react-router-dom";
 import LogoDark from "../../components/images/logo/logo-dark.svg";
 import Logo from "../../components/images/logo/logo.svg";
 import axiosInstance from "../../axios"
-import { useRef } from "react";
+import userSix from "../../components/images/user/user-01.png"
+import { useRef, useState } from "react";
 const SignUp = () => {
+  const [file, setFile] = useState({})
   const nameRef = useRef()
   const emaiRef = useRef()
   const passwordRef = useRef()
   const rePasswordRef = useRef()
   const singUpHandler = (e) => {
     e.preventDefault();
+    const formData = new FormData();
+    formData.append('file',file);
     const name = nameRef.current.value;
     const email = emaiRef.current.value;
     const password = passwordRef.current.value;
     const rePassword = rePasswordRef.current.value;
     if(password === rePassword){
-      return  axiosInstance.post("auth/signup", {
-        name,email,password
+       axiosInstance.post("auth/signup", {
+        name,email,password, image:formData
        }).then( (res) => {
            console.log("response", res);
          }).catch( (err) => {
@@ -26,6 +30,7 @@ const SignUp = () => {
       alert("Your Password field not match both")
     }
   }
+
   return (
     <>
       <div className="rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
@@ -175,12 +180,16 @@ const SignUp = () => {
               </h2>
 
               <form onSubmit={singUpHandler}>
-              <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
-            <div className="relative drop-shadow-2">
-              <img src={""} alt="profile" />
+                <div className="relative z-30 mx-auto h-30 w-full max-w-30 rounded-full  p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
+            <div className="absolute ">
+              {/* <img src={userSix} alt="profile" /> */}
+              
+<div class="relative w-20 h-20 md:w-24 md:h-24 overflow-hidden border rounded-full dark:bg-gray-600">
+    <svg class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 h-16 h-16 md:w-20 md:h-20 text-gray-400 " fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path></svg>
+</div>
               <label
                 htmlFor="profile"
-                className="absolute bottom-0 right-0 flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 sm:bottom-2 sm:right-2"
+                className="absolute flex h-8.5 w-8.5 cursor-pointer items-center justify-center rounded-full bg-primary text-white hover:bg-opacity-90 left-14 bottom-3  md:bottom-4 md:left-18"
               >
                 <svg
                   className="fill-current"
@@ -208,6 +217,7 @@ const SignUp = () => {
                   name="profile"
                   id="profile"
                   className="sr-only"
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
               </label>
             </div>

@@ -27,7 +27,7 @@ router.post("/signup",upload.single('image'), async (req, res) => {
   try {
     // await joiUSerSchema.validateAsync(req.body);
     const { name, email, password } = req.body;
-    console.log(req.file);
+    console.log(req);
     const image = req.file.path;
     const response = await createUser({ name, email, password , image:image});
     return res.status(200).send({ status: 200, message: response });
