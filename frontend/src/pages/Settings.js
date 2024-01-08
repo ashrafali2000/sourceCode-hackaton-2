@@ -12,29 +12,29 @@ const Settings = () => {
   //     : []
   // );
   // useEffect(() => {
-    // storing input name
+  // storing input name
   //   localStorage.setItem("alertSettings", JSON.stringify(rows));
   // }, [rows]);
   // const [rowToEdit, setRowToEdit] = useState(null);
 
   // const handleDeleteRow = (targetIndex) => {
-    // setRows(rows.filter((_, idx) => idx !== targetIndex));
+  // setRows(rows.filter((_, idx) => idx !== targetIndex));
   // };
 
   // const handleEditRow = (idx) => {
-    // setRowToEdit(idx);
-    // setModalOpen(true);
+  // setRowToEdit(idx);
+  // setModalOpen(true);
   // };
 
   // const handleSubmit = (newRow) => {
-    // rowToEdit === null;
-    // ? setRows([...rows, newRow])
-    // : setRows(
-    //     rows.map((currRow, idx) => {
-    //       if (idx !== rowToEdit) return currRow;
-    //       return newRow;
-    //     })
-    //   );
+  //   rowToEdit === null;
+  // ? setRows([...rows, newRow])
+  // : setRows(
+  //     rows.map((currRow, idx) => {
+  //       if (idx !== rowToEdit) return currRow;
+  //       return newRow;
+  //     })
+  //   );
   // };
 
   // create rows
