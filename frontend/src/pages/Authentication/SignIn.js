@@ -1,10 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LogoDark from "../../components/images/logo/logo-dark.svg";
 import Logo from "../../components/images/logo/logo.svg";
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import axiosInstance from "../../axios";
+import { AuthContext } from "../../contexts/authContext";
 
 const SignIn = () => {
+  const userImgHandler = useContext(AuthContext);
+  const userimg = userImgHandler.userImageHandler;
+  const navigate = useNavigate();
   const [resAlert, setResAlert] = useState("");
   const emaiRef = useRef();
   const passwordRef = useRef();
@@ -20,7 +24,11 @@ const SignIn = () => {
       .then((res) => {
         console.log("response", res.data);
         setResAlert(res.data.user.message);
+        userimg(res.data.user.userFound.images);
         localStorage.setItem("authToken", res.data.user.token);
+        if (localStorage.getItem("authToken")) {
+          navigate("/");
+        }
       })
       .catch((err) => {
         console.log("error--->", err);
@@ -34,7 +42,7 @@ const SignIn = () => {
   return (
     <>
       {resAlert && (
-        <div className="absolute md:left-1/2 transform md:-translate-x-1/2  top-0">
+        <div className="absolute md:left-1/2 transform md:-translate-x-1/2 w-full top-0">
           <div className="flex w-3/4  md:w-3/4 border-l-6 border-[#34D399] bg-[#b9ebd5] px-4 py-8 shadow-md dark:bg-[#1B1B24] dark:bg-opacity-30 md:p-9">
             <div className="mr-5 flex h-9 w-full max-w-[36px] items-center justify-center rounded-lg bg-[#34D399]">
               <svg
