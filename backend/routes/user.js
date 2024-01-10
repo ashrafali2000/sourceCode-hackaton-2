@@ -46,6 +46,7 @@ router.post("/signup", upload.single("file"), async (req, res) => {
 router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(req.body);
     const response = await loginUser({ email, password });
     return res.status(200).send({ status: 200, user: response });
   } catch (err) {
