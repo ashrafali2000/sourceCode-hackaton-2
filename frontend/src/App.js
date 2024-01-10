@@ -5,13 +5,20 @@ import Loader from "./components/common/Loader";
 import ECommerce from "./pages/dashBoard/ECommerce";
 import SignIn from "./pages/Authentication/SignIn";
 import SignUp from "./pages/Authentication/SignUp";
+import { useNavigate } from "react-router-dom";
 
 import routes from "./routes";
+import { AuthContext } from "./contexts/authContext";
 
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+  const [userImage, setUserImage] = useState("");
+  const userImageHandler = (img) => {
+    setUserImage(img);
+  };
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -26,27 +33,33 @@ function App() {
         reverseOrder={false}
         containerClassName="overflow-auto"
       />
-      <Routes>
-        <Route path="/auth/signin" element={<SignIn />} />
-        <Route path="/auth/signup" element={<SignUp />} />
-        <Route element={<DefaultLayout />}>
-          <Route index element={<ECommerce />} />
-          {routes.map((route, index) => {
-            const { path, component: Component } = route;
-            return (
-              <Route
-                key={index}
-                path={path}
-                element={
-                  <Suspense fallback={<Loader />}>
-                    <Component />
-                  </Suspense>
-                }
-              />
-            );
-          })}
-        </Route>
-      </Routes>
+      <AuthContext.Provider value={{ Image: userImage, userImageHandler }}>
+        <Routes>
+          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/auth/signup" element={<SignUp />} />
+          <Route element={<DefaultLayout />}>
+            {localStorage.getItem("authToken") ? (
+              <Route index element={<ECommerce />} />
+            ) : (
+              navigate("/auth/signin")
+            )}
+            {routes.map((route, index) => {
+              const { path, component: Component } = route;
+              return (
+                <Route
+                  key={index}
+                  path={path}
+                  element={
+                    <Suspense fallback={<Loader />}>
+                      <Component />
+                    </Suspense>
+                  }
+                />
+              );
+            })}
+          </Route>
+        </Routes>
+      </AuthContext.Provider>
     </>
   );
 }
