@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Link, json } from "react-router-dom";
 
 import UserOne from "../images/user/user-01.png";
+import { AuthContext } from "../../contexts/authContext";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
+  const handleUserImg = useContext(AuthContext);
+  const userImg = handleUserImg.Image;
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
@@ -35,6 +37,10 @@ const DropdownUser = () => {
     return () => document.removeEventListener("keydown", keyHandler);
   });
 
+  const logOutHandler = () => {
+    localStorage.removeItem("authToken");
+  };
+
   return (
     <div className="relative">
       <Link
@@ -50,8 +56,12 @@ const DropdownUser = () => {
           <span className="block text-xs">UX Designer</span>
         </span>
 
-        <span className="h-12 w-12 rounded-full">
-          <img src={UserOne} alt="User" />
+        <span className="h-14 w-14 rounded-full">
+          <img
+            src={userImg}
+            alt="User"
+            className="rounded-full w-full h-full"
+          />
         </span>
 
         <svg
@@ -155,7 +165,11 @@ const DropdownUser = () => {
             </Link>
           </li>
         </ul>
-        <button className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base">
+        <a
+          href="/"
+          className="flex items-center gap-3.5 py-4 px-6 text-sm font-medium duration-300 ease-in-out hover:text-primary lg:text-base"
+          onClick={logOutHandler}
+        >
           <svg
             className="fill-current"
             width="22"
@@ -174,7 +188,7 @@ const DropdownUser = () => {
             />
           </svg>
           Log Out
-        </button>
+        </a>
       </div>
       {/* <!-- Dropdown End --> */}
     </div>
