@@ -24,9 +24,10 @@ const SignIn = () => {
       .then((res) => {
         console.log("response", res.data);
         setResAlert(res.data.user.message);
-        userimg(res.data.user.userFound.images);
-        localStorage.setItem("authToken", res.data.user.token);
-        if (localStorage.getItem("authToken")) {
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        const userData = JSON.parse(localStorage.getItem("user"));
+        userimg(userData.userFound.images);
+        if (userData.userFound.token) {
           navigate("/");
         }
       })
