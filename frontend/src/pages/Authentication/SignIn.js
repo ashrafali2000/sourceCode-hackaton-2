@@ -4,10 +4,13 @@ import Logo from "../../components/images/logo/logo.svg";
 import { useContext, useRef, useState } from "react";
 import axiosInstance from "../../axios";
 import { AuthContext } from "../../contexts/authContext";
-
+const userHandler = () => {
+  return JSON.parse(localStorage.getItem("user"));
+}
 const SignIn = () => {
   const userImgHandler = useContext(AuthContext);
   const userimg = userImgHandler.userImageHandler;
+  const username = userImgHandler.userNameHandler;
   const navigate = useNavigate();
   const [resAlert, setResAlert] = useState("");
   const emaiRef = useRef();
@@ -25,9 +28,11 @@ const SignIn = () => {
         console.log("response", res.data);
         setResAlert(res.data.user.message);
         localStorage.setItem("user", JSON.stringify(res.data.user));
-        const userData = JSON.parse(localStorage.getItem("user"));
+        const userData = userHandler();
         userimg(userData.userFound.images);
-        if (userData.userFound.token) {
+        username(userData.userFound.name);
+        console.log(userData)
+        if (userData.token) {
           navigate("/");
         }
       })

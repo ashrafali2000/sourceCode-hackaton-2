@@ -1,13 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
-import { Link, json } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import UserOne from "../images/user/user-01.png";
 import { AuthContext } from "../../contexts/authContext";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const handleUserImg = useContext(AuthContext);
   const userImg = handleUserImg.Image;
+  const userName = handleUserImg.Name;
   const trigger = useRef(null);
   const dropdown = useRef(null);
 
@@ -38,7 +38,7 @@ const DropdownUser = () => {
   });
 
   const logOutHandler = () => {
-    localStorage.removeItem("authToken");
+    localStorage.removeItem("user");
   };
 
   return (
@@ -51,7 +51,7 @@ const DropdownUser = () => {
       >
         <span className="hidden text-right lg:block">
           <span className="block text-sm font-medium text-black dark:text-white">
-            Thomas Anree
+          {userName}
           </span>
           <span className="block text-xs">UX Designer</span>
         </span>
