@@ -13,7 +13,7 @@ import { AuthContext } from "./contexts/authContext";
 const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 const userHandler = () => {
   return JSON.parse(localStorage.getItem("user"));
-}
+};
 function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -43,7 +43,14 @@ function App() {
         reverseOrder={false}
         containerClassName="overflow-auto"
       />
-      <AuthContext.Provider value={{ Image: userImage, userImageHandler, Name:userName , userNameHandler }}>
+      <AuthContext.Provider
+        value={{
+          Image: userImage,
+          userImageHandler,
+          Name: userName,
+          userNameHandler,
+        }}
+      >
         <Routes>
           <Route path="/auth/signin" element={<SignIn />} />
           <Route path="/auth/signup" element={<SignUp />} />
@@ -51,7 +58,7 @@ function App() {
             {token ? (
               <Route index element={<ECommerce />} />
             ) : (
-              navigate("/auth/signin")
+              navigate("/auth/signup")
             )}
             {routes.map((route, index) => {
               const { path, component: Component } = route;

@@ -32,7 +32,7 @@ const SignUp = () => {
           console.log("response", res);
         })
         .catch((err) => {
-          console.log("error--->", err);
+          console.log("SignUperror--->", err);
         });
     } else {
       alert("Your Password field not match both");
