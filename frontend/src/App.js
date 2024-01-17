@@ -14,14 +14,19 @@ const DefaultLayout = lazy(() => import("./layout/DefaultLayout"));
 const userHandler = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
+const userImage1Handler = userHandler();
+const userImage1 = userImage1Handler && userImage1Handler.userFound.images;
+const userName1 = userImage1Handler && userImage1Handler.userFound.name;
+console.log(userImage1);
+console.log(userName1);
 function App() {
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const userData = userHandler();
   const token = userData && userData.token;
   console.log("token---->", token);
-  const [userImage, setUserImage] = useState("");
-  const [userName, setUserName] = useState("");
+  const [userImage, setUserImage] = useState(userImage1);
+  const [userName, setUserName] = useState(userName1);
 
   const userNameHandler = (name) => {
     setUserName(name);
@@ -58,7 +63,7 @@ function App() {
             {token ? (
               <Route index element={<ECommerce />} />
             ) : (
-              navigate("/auth/signup")
+              navigate("/auth/signin")
             )}
             {routes.map((route, index) => {
               const { path, component: Component } = route;
