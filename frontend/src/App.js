@@ -57,13 +57,13 @@ function App() {
         }}
       >
         <Routes>
-          <Route path="/auth/signin" element={<SignIn />} />
+          <Route path="/dashboard" element={<ECommerce />} />
           <Route path="/auth/signup" element={<SignUp />} />
           <Route element={<DefaultLayout />}>
-            {token ? (
-              <Route index element={<ECommerce />} />
+            {!token ? (
+              <Route index element={<SignIn />} />
             ) : (
-              navigate("/auth/signin")
+              navigate("/dashboard")
             )}
             {routes.map((route, index) => {
               const { path, component: Component } = route;
